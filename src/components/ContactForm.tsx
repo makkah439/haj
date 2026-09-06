@@ -3,6 +3,7 @@
 import { useState, type FormEvent } from "react";
 import { AnimatePresence, m } from "framer-motion";
 import { siteConfig } from "@/lib/site-config";
+import { trackEvent } from "@/lib/analytics";
 
 type SubmitState = "idle" | "submitting" | "sent" | "error";
 
@@ -111,6 +112,12 @@ export default function ContactForm() {
       "_blank",
       "noopener,noreferrer",
     );
+    trackEvent("whatsapp_click", {
+      link_url: `https://wa.me/${siteConfig.whatsappNumber}`,
+      page_path: window.location.pathname,
+      link_text: "إرسال الاستفسار",
+      location: "contact-form",
+    });
     setState("sent");
     setFeedback("سيتم فتح واتساب لإرسال استفسارك مباشرة.");
     form.reset();
