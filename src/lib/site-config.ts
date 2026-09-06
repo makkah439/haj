@@ -20,7 +20,7 @@ export const siteConfig = {
   googleMaps: "",
   socialLinks: {
     facebook: "",
-    instagram: "",
+    instagram: "https://www.instagram.com/makkahassuit",
     tiktok: "https://www.tiktok.com/@hawadhaj",
     twitter: "",
     youtube: "https://www.youtube.com/@hassanawadm",
