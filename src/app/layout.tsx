@@ -19,7 +19,7 @@ const notoKufiArabic = Noto_Kufi_Arabic({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(siteConfig.url),
+  metadataBase: new URL("https://hassanhaj.com"),
   title: {
     default: siteConfig.name,
     template: `%s | ${siteConfig.name}`,
@@ -44,6 +44,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/",
   },
+  // TODO: Add Google Search Console verification code here.
 };
 
 const contactPoints = [phoneInternational, phoneSecondaryInternational]

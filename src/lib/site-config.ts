@@ -1,21 +1,11 @@
-// Resolves in this order: an explicit SITE_URL override, Vercel's
-// auto-injected production domain (updates itself once a custom domain like
-// hassanhaj.com is attached in the Vercel dashboard — no code change
-// needed), Vercel's per-deployment URL, then the intended final domain.
-function resolveSiteUrl() {
-  if (process.env.SITE_URL) return process.env.SITE_URL;
-  if (process.env.VERCEL_PROJECT_PRODUCTION_URL)
-    return `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`;
-  if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
-  return "https://hassanhaj.com";
-}
+const canonicalSiteUrl = "https://hassanhaj.com";
 
 export const siteConfig = {
   name: "الشيخ حسن عوض للحج والعمرة",
   shortName: "الشيخ حسن عوض",
   description:
     "شركة الشيخ حسن عوض لتنظيم رحلات الحج والعمرة من مصر، بإشراف ميداني مباشر وبرامج موثوقة لمختلف الفئات.",
-  url: resolveSiteUrl(),
+  url: canonicalSiteUrl,
   logo: "/images/logo.jpg",
   ogImage: "/images/hero-banner.jpg",
   phone: "01025050898",

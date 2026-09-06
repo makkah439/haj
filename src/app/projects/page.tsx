@@ -1,4 +1,3 @@
-import Link from "next/link";
 import Reveal from "@/components/motion/Reveal";
 import { StaggerGroup, StaggerItem } from "@/components/motion/StaggerGroup";
 import GeometricPattern from "@/components/GeometricPattern";
@@ -68,10 +67,7 @@ export default async function ProjectsPage() {
             <StaggerGroup className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {projects.map((project) => (
                 <StaggerItem key={project.slug}>
-                  <Link
-                    href={`/projects/${project.slug}`}
-                    className="group block h-full overflow-hidden rounded-[1.5rem] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] shadow-sm transition hover:-translate-y-1 hover:shadow-soft"
-                  >
+                  <article className="group block h-full overflow-hidden rounded-[1.5rem] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] shadow-sm">
                     <div className="relative aspect-video w-full overflow-hidden bg-[color:var(--color-ivory)]">
                       {project.media[0] ? (
                         project.media[0].type === "image" ? (
@@ -102,7 +98,7 @@ export default async function ProjectsPage() {
                         </p>
                       ) : null}
                     </div>
-                  </Link>
+                  </article>
                 </StaggerItem>
               ))}
             </StaggerGroup>

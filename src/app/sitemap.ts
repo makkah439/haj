@@ -2,49 +2,52 @@ import { MetadataRoute } from "next";
 import { siteConfig } from "@/lib/site-config";
 import { getPrograms } from "@/lib/programs-store";
 import { getPosts } from "@/lib/blog-store";
-import { getProjects } from "@/lib/projects-store";
 
-// Content is refreshed periodically so externally stored content remains
-// visible in the sitemap without requiring a new deployment.
-export const revalidate = 300;
+const staticPages = [
+  { path: "", priority: 1 },
+  { path: "/about", priority: 0.7 },
+  { path: "/services", priority: 0.8 },
+  { path: "/hajj", priority: 0.9 },
+  { path: "/hajj/programs", priority: 0.9 },
+  { path: "/hajj/guide", priority: 0.8 },
+  { path: "/hajj/documents", priority: 0.7 },
+  { path: "/umrah", priority: 0.9 },
+  { path: "/umrah/programs", priority: 0.9 },
+  { path: "/umrah/guide", priority: 0.8 },
+  { path: "/umrah/documents", priority: 0.7 },
+  { path: "/makkah", priority: 0.8 },
+  { path: "/madinah", priority: 0.8 },
+  { path: "/blog", priority: 0.8 },
+  { path: "/projects", priority: 0.6 },
+  { path: "/contact", priority: 0.7 },
+  { path: "/faq", priority: 0.7 },
+  { path: "/privacy", priority: 0.3 },
+  { path: "/terms", priority: 0.3 },
+  { path: "/cancellation", priority: 0.3 },
+] as const;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = siteConfig.url;
   const lastModified = new Date();
-  const [projects, posts, programs] = await Promise.all([
-    getProjects().catch(() => []),
-    getPosts().catch(() => []),
-    getPrograms().catch(() => []),
-  ]);
+  const [posts, programs] = await Promise.all([getPosts(), getPrograms()]);
   const hajjPrograms = programs.filter((p) => p.type === "hajj");
   const umrahPrograms = programs.filter((p) => p.type === "umrah");
-
-  const paths = [
-    "",
-    "/about",
-    "/services",
-    "/hajj",
-    "/hajj/programs",
-    ...hajjPrograms.map((program) => `/hajj/programs/${program.slug}`),
-    "/hajj/guide",
-    "/hajj/documents",
-    "/umrah",
-    "/umrah/programs",
-    ...umrahPrograms.map((program) => `/umrah/programs/${program.slug}`),
-    "/umrah/guide",
-    "/umrah/documents",
-    "/makkah",
-    "/madinah",
-    "/blog",
-    ...posts.map((post) => `/blog/${post.slug}`),
-    "/projects",
-    ...projects.map((project) => `/projects/${project.slug}`),
-    "/contact",
-    "/faq",
-    "/privacy",
-    "/terms",
-    "/cancellation",
+  const entries = [
+    ...staticPages,
+    ...hajjPrograms.map((program) => ({
+      path: `/hajj/programs/${program.slug}`,
+      priority: 0.7,
+    })),
+    ...umrahPrograms.map((program) => ({
+      path: `/umrah/programs/${program.slug}`,
+      priority: 0.7,
+    })),
+    ...posts.map((post) => ({ path: `/blog/${post.slug}`, priority: 0.6 })),
   ];
 
-  return paths.map((path) => ({ url: `${baseUrl}${path}`, lastModified }));
+  return entries.map(({ path, priority }) => ({
+    url: `${siteConfig.url}${path}`,
+    lastModified,
+    changeFrequency: path === "" || path === "/contact" ? "monthly" : "yearly",
+    priority,
+  }));
 }
