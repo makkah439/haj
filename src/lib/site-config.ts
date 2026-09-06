@@ -31,7 +31,7 @@ export const siteConfig = {
   socialLinks: {
     facebook: "",
     instagram: "",
-    tiktok: "",
+    tiktok: "https://www.tiktok.com/@hawadhaj",
     twitter: "",
     youtube: "",
   },

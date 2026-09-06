@@ -1,97 +1,113 @@
-import type { Metadata, Viewport } from 'next';
-import { Noto_Kufi_Arabic } from 'next/font/google';
-import './globals.css';
-import { siteConfig, phoneInternational, phoneSecondaryInternational } from '@/lib/site-config';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
-import FloatingActions from '@/components/FloatingActions';
-import MotionProvider from '@/components/motion/MotionProvider';
+import type { Metadata, Viewport } from "next";
+import { Noto_Kufi_Arabic } from "next/font/google";
+import "./globals.css";
+import {
+  siteConfig,
+  phoneInternational,
+  phoneSecondaryInternational,
+} from "@/lib/site-config";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import FloatingActions from "@/components/FloatingActions";
+import MotionProvider from "@/components/motion/MotionProvider";
 
 const notoKufiArabic = Noto_Kufi_Arabic({
-  subsets: ['arabic'],
-  weight: ['400', '500', '600', '700'],
-  variable: '--font-noto-kufi',
-  display: 'swap'
+  subsets: ["arabic"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-noto-kufi",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
     default: siteConfig.name,
-    template: `%s | ${siteConfig.name}`
+    template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.description,
-  keywords: ['حج', 'عمرة', 'برامج الحج من مصر', 'برامج العمرة من مصر'],
+  keywords: ["حج", "عمرة", "برامج الحج من مصر", "برامج العمرة من مصر"],
   openGraph: {
     title: siteConfig.name,
     description: siteConfig.description,
-    type: 'website',
-    locale: 'ar_EG',
+    type: "website",
+    locale: "ar_EG",
     url: siteConfig.url,
     siteName: siteConfig.name,
-    images: [{ url: siteConfig.ogImage }]
+    images: [{ url: siteConfig.ogImage }],
   },
   twitter: {
-    card: 'summary_large_image',
+    card: "summary_large_image",
     title: siteConfig.name,
     description: siteConfig.description,
-    images: [siteConfig.ogImage]
+    images: [siteConfig.ogImage],
   },
   alternates: {
-    canonical: '/'
-  }
+    canonical: "/",
+  },
 };
 
 const contactPoints = [phoneInternational, phoneSecondaryInternational]
   .filter(Boolean)
   .map((telephone) => ({
-    '@type': 'ContactPoint',
+    "@type": "ContactPoint",
     telephone,
-    contactType: 'customer service',
-    areaServed: 'EG',
-    availableLanguage: ['ar']
+    contactType: "customer service",
+    areaServed: "EG",
+    availableLanguage: ["ar"],
   }));
 
 const organizationJsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'TravelAgency',
+  "@context": "https://schema.org",
+  "@type": "TravelAgency",
   name: siteConfig.name,
   alternateName: siteConfig.shortName,
   description: siteConfig.description,
   url: siteConfig.url,
   logo: `${siteConfig.url}${siteConfig.logo}`,
   image: `${siteConfig.url}${siteConfig.ogImage}`,
+  sameAs: Object.values(siteConfig.socialLinks).filter(Boolean),
   telephone: phoneInternational || undefined,
   email: siteConfig.email || undefined,
   contactPoint: contactPoints.length > 0 ? contactPoints : undefined,
   areaServed: {
-    '@type': 'Country',
-    name: 'مصر'
-  }
+    "@type": "Country",
+    name: "مصر",
+  },
 };
 
 const websiteJsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'WebSite',
+  "@context": "https://schema.org",
+  "@type": "WebSite",
   name: siteConfig.name,
   url: siteConfig.url,
-  inLanguage: 'ar'
+  inLanguage: "ar",
 };
 
 export const viewport: Viewport = {
-  themeColor: '#0f4d3a',
-  width: 'device-width',
+  themeColor: "#0f4d3a",
+  width: "device-width",
   initialScale: 1,
-  maximumScale: 1
+  maximumScale: 1,
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <html lang="ar" dir="rtl" suppressHydrationWarning className={notoKufiArabic.variable}>
+    <html
+      lang="ar"
+      dir="rtl"
+      suppressHydrationWarning
+      className={notoKufiArabic.variable}
+    >
       <body className="min-h-screen bg-[color:var(--color-background)] font-sans text-[color:var(--color-text)]">
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(organizationJsonLd),
+          }}
         />
         <script
           type="application/ld+json"
