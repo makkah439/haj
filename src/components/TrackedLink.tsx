@@ -38,7 +38,6 @@ export default function TrackedLink({
     const pagePath = window.location.pathname;
     if (eventName === "phone_click") {
       trackEvent(eventName, {
-        phone_number: href?.replace(/^tel:/, ""),
         page_path: pagePath,
         link_text: event.currentTarget.textContent?.trim() || undefined,
         location,

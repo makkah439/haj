@@ -3,20 +3,36 @@ export type AnalyticsParams = Record<
   string | number | boolean | undefined
 >;
 
-type Gtag = (
-  command: "event",
-  eventName: string,
-  params?: AnalyticsParams,
-) => void;
+type Gtag = {
+  (command: "event", eventName: string, params?: AnalyticsParams): void;
+  (command: "js", date: Date): void;
+  (command: "config", measurementId: string): void;
+};
 
 declare global {
   interface Window {
+    dataLayer?: unknown[];
     gtag?: Gtag;
   }
 }
 
 export function trackEvent(eventName: string, params?: AnalyticsParams): void {
-  if (typeof window === "undefined" || typeof window.gtag !== "function")
+  if (typeof window === "undefined") return;
+
+  const eventArgs = ["event", eventName, params] as const;
+  const gtag = window.gtag;
+
+  if (typeof gtag === "function") {
+    gtag(...eventArgs);
+    if (process.env.NODE_ENV !== "production") {
+      console.debug("[GA4] event sent", eventName, params);
+    }
     return;
-  window.gtag("event", eventName, params);
+  }
+
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push(eventArgs);
+  if (process.env.NODE_ENV !== "production") {
+    console.debug("[GA4] event queued until gtag is ready", eventName, params);
+  }
 }

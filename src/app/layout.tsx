@@ -114,9 +114,9 @@ export default function RootLayout({
         <Script id="google-analytics" strategy="afterInteractive">
           {`
             window.dataLayer = window.dataLayer || [];
-            function gtag(){window.dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', '${googleAnalyticsId}');
+            window.gtag = window.gtag || function(){window.dataLayer.push(arguments);};
+            window.gtag('js', new Date());
+            window.gtag('config', '${googleAnalyticsId}');
           `}
         </Script>
         <script
