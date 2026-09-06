@@ -1,0 +1,93 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  --color-primary: #0f4d3a;
+  --color-primary-dark: #0b3b2c;
+  --color-gold: #b88a2d;
+  --color-gold-soft: #d8c07d;
+  --color-ivory: #f6efe2;
+  --color-sand: #e9dfc9;
+  --color-text: #1f2b24;
+  --color-muted: #637067;
+  --color-border: #e4ddcf;
+  --color-background: #fcfaf7;
+  --color-surface: #ffffff;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 17.5px;
+}
+
+body {
+  margin: 0;
+  background: var(--color-background);
+  color: var(--color-text);
+  font-family: var(--font-noto-kufi), 'Tahoma', 'Segoe UI', sans-serif;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.75;
+}
+
+/* Arabic is a cursive/connected script — letter-spacing can force browsers to
+   drop glyph joining, so headings are kept at normal tracking and instead
+   rely on line-height + text-wrap for a tighter, more deliberate rhythm. */
+h1,
+h2,
+h3,
+h4 {
+  line-height: 1.9;
+  text-wrap: balance;
+}
+
+::selection {
+  background: rgba(184, 138, 45, 0.25);
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-gold);
+  border-radius: 999px;
+  border: 3px solid var(--color-background);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary);
+}
+
+html {
+  scrollbar-color: var(--color-gold) var(--color-background);
+  scrollbar-width: thin;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+@layer components {
+  .container-shell {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .section-title {
+    @apply text-3xl sm:text-4xl font-semibold text-[color:var(--color-primary)];
+  }
+
+  .eyebrow {
+    @apply text-sm font-semibold text-[color:var(--color-gold)];
+  }
+}
