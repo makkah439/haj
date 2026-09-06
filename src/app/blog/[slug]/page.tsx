@@ -13,6 +13,11 @@ import { buildMetadata } from "@/lib/metadata";
 // Refresh periodically when an external content manifest is available.
 export const revalidate = 300;
 
+export async function generateStaticParams() {
+  const posts = await getPosts();
+  return posts.map((post) => ({ slug: post.slug }));
+}
+
 export async function generateMetadata({
   params,
 }: {

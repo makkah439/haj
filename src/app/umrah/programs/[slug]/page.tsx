@@ -6,13 +6,18 @@ import Reveal from "@/components/motion/Reveal";
 import GeometricPattern from "@/components/GeometricPattern";
 import IslamicMotifs from "@/components/IslamicMotifs";
 import { CrescentMoonIcon } from "@/components/icons";
-import { getProgram } from "@/lib/programs-store";
+import { getProgram, getProgramsByType } from "@/lib/programs-store";
 import { siteConfig, routes } from "@/lib/site-config";
 import { breadcrumbJsonLd } from "@/lib/breadcrumbs";
 import { buildMetadata } from "@/lib/metadata";
 
 // Refresh periodically when an external content manifest is available.
 export const revalidate = 300;
+
+export async function generateStaticParams() {
+  const programs = await getProgramsByType("umrah");
+  return programs.map((program) => ({ slug: program.slug }));
+}
 
 export async function generateMetadata({
   params,
