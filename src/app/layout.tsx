@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import Script from "next/script";
 import { Noto_Kufi_Arabic } from "next/font/google";
 import "./globals.css";
 import {
@@ -84,6 +85,8 @@ const websiteJsonLd = {
   inLanguage: "ar",
 };
 
+const googleAnalyticsId = "G-Z0RM0LHWCW";
+
 export const viewport: Viewport = {
   themeColor: "#0f4d3a",
   width: "device-width",
@@ -104,6 +107,18 @@ export default function RootLayout({
       className={notoKufiArabic.variable}
     >
       <body className="min-h-screen bg-[color:var(--color-background)] font-sans text-[color:var(--color-text)]">
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${googleAnalyticsId}`}
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){window.dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${googleAnalyticsId}');
+          `}
+        </Script>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
