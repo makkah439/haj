@@ -23,7 +23,7 @@ export const siteConfig = {
     instagram: "",
     tiktok: "https://www.tiktok.com/@hawadhaj",
     twitter: "",
-    youtube: "",
+    youtube: "https://www.youtube.com/@hassanawadm",
   },
   businessHours: "",
   defaultWhatsAppMessage:

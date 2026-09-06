@@ -13,6 +13,7 @@ import {
   FacebookIcon,
   InstagramIcon,
   TiktokIcon,
+  YoutubeIcon,
 } from "@/components/SocialIcons";
 import TrackedLink from "@/components/TrackedLink";
 
@@ -66,6 +67,12 @@ const socialItems = [
     href: siteConfig.socialLinks.tiktok,
     label: "صفحتنا على تيك توك",
     Icon: TiktokIcon,
+  },
+  {
+    key: "youtube",
+    href: siteConfig.socialLinks.youtube,
+    label: "قناتنا على يوتيوب",
+    Icon: YoutubeIcon,
   },
 ];
 
