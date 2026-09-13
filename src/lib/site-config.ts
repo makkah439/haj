@@ -19,7 +19,7 @@ export const siteConfig = {
   country: "مصر",
   googleMaps: "",
   socialLinks: {
-    facebook: "",
+    facebook: "https://www.facebook.com/profile.php?id=61593481722780",
     instagram: "https://www.instagram.com/makkahassuit",
     tiktok: "https://www.tiktok.com/@hawadhaj",
     twitter: "",

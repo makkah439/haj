@@ -6,6 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { siteConfig, routes, phoneInternational } from "@/lib/site-config";
 import TrackedLink from "@/components/TrackedLink";
+import { FacebookIcon } from "@/components/SocialIcons";
 
 const navItems = [
   { label: "الرئيسية", href: routes.home },
@@ -104,6 +105,18 @@ export default function Header() {
         </nav>
 
         <div className="flex items-center gap-2 sm:gap-3">
+          {siteConfig.socialLinks.facebook ? (
+            <a
+              href={siteConfig.socialLinks.facebook}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="صفحتنا على فيسبوك"
+              title="صفحتنا على فيسبوك"
+              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[color:var(--color-border)] text-[color:var(--color-primary)] transition hover:bg-[color:var(--color-ivory)]"
+            >
+              <FacebookIcon className="h-5 w-5" />
+            </a>
+          ) : null}
           <TrackedLink
             href={`tel:${phoneInternational}`}
             location="header-mobile"
