@@ -55,3 +55,21 @@ export function YoutubeIcon({ className }: IconProps) {
     </svg>
   );
 }
+
+export function LinktreeIcon({ className }: IconProps) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={1.8}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+    >
+      <path d="m12 3 2.2 4.4 3.8-1.1-1.1 3.8 4.4 2.2-4.4 2.2 1.1 3.8-3.8-1.1L12 21l-2.2-3.8-3.8 1.1 1.1-3.8L2.7 12l4.4-2.2L6 6.3l3.8 1.1L12 3Z" />
+      <path d="M12 13v8" />
+    </svg>
+  );
+}

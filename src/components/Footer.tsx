@@ -12,6 +12,7 @@ import { PhoneIcon } from "@/components/icons";
 import {
   FacebookIcon,
   InstagramIcon,
+  LinktreeIcon,
   TiktokIcon,
   YoutubeIcon,
 } from "@/components/SocialIcons";
@@ -73,6 +74,12 @@ const socialItems = [
     href: siteConfig.socialLinks.youtube,
     label: "قناتنا على يوتيوب",
     Icon: YoutubeIcon,
+  },
+  {
+    key: "linktree",
+    href: siteConfig.socialLinks.linktree,
+    label: "جميع روابطنا على Linktree",
+    Icon: LinktreeIcon,
   },
 ];
 

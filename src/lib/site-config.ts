@@ -24,6 +24,7 @@ export const siteConfig = {
     tiktok: "https://www.tiktok.com/@hawadhaj",
     twitter: "",
     youtube: "https://www.youtube.com/@hassanawadm",
+    linktree: "https://linktr.ee/hassanhaj",
   },
   businessHours: "",
   defaultWhatsAppMessage:
